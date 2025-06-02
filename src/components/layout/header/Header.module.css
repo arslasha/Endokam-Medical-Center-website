@@ -12,6 +12,9 @@
     z-index: 1000;
 }
 
+.header__logo {
+    color: var(--primary-color);
+}
 .header__inner {
     max-width: 1280px;
     margin: 0 auto;

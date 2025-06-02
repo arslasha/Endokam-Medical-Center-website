@@ -56,10 +56,10 @@ export default function Header() {
                     <nav className={styles.header__nav}>
                         <Link href="/about" className={styles.header__link}>О нас</Link>
                         <Link href="/news" className={styles.header__link}>Новости</Link>
-                        <Link href="/patients" className={styles.header__link}>Пациентам</Link>
+                        <Link href="/patient" className={styles.header__link}>Пациентам</Link>
                         <Link href="/services" className={styles.header__link}>Услуги</Link>
                         <Link href="/reviews" className={styles.header__link}>Отзывы</Link>
-                        <Link href="/results" className={styles.header__link}>Анализы</Link>
+                        <Link href="/analyzes" className={styles.header__link}>Анализы</Link>
                     </nav>
 
                     <div className={styles.header__icons}>
@@ -99,10 +99,10 @@ export default function Header() {
                         <div className={styles.header__dropdownMenu}>
                             <Link href="/about" className={styles.header__link}>О нас</Link>
                             <Link href="/news" className={styles.header__link}>Новости</Link>
-                            <Link href="/patients" className={styles.header__link}>Пациентам</Link>
+                            <Link href="/patient" className={styles.header__link}>Пациентам</Link>
                             <Link href="/services" className={styles.header__link}>Услуги</Link>
                             <Link href="/reviews" className={styles.header__link}>Отзывы</Link>
-                            <Link href="/results" className={styles.header__link}>Анализы</Link>
+                            <Link href="/analyzes" className={styles.header__link}>Анализы</Link>
                             <Link href="/login" className={styles.header__link}>Войти</Link>
                         </div>
                     )}
