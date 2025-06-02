@@ -1,0 +1,14 @@
+:root {
+    --font-family: 'Inter', sans-serif;
+    --primary-color: #008080; /* основной цвет Ant */
+    --text-color: #212121;
+    --bg-color: #ffff;
+    --bg-color-2: #f9f9f9;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-family);
+    background: #fafafa;
+    color: #212121;
+}

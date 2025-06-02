@@ -1,0 +1,79 @@
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+.title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.procedure {
+    margin-bottom: 32px;
+    padding: 24px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    background-color: #fdfdfd;
+    transition: box-shadow 0.3s ease;
+}
+
+.procedure:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.procedureHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.procedureName {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: 500;
+    color: #008080;
+    white-space: nowrap;
+}
+
+.description {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+.preparation {
+    font-size: 15px;
+    color: #555;
+    background-color: #f3f7f8;
+    padding: 12px;
+    border-left: 4px solid #008080;
+    border-radius: 4px;
+}
+
+.backButton {
+    margin-top: 40px;
+    display: block;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    background-color: #008080;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.backButton:hover {
+    background-color: #006666;
+}
