@@ -1,0 +1,101 @@
+/* src/app/analyzes/Analyzes.module.css */
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: var(--bg-color);
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    color: var(--text-color);
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.input,
+.dateInput {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.error {
+    color: red;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.checkboxContainer {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.checkboxLabel {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.submitButton {
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+}
+
+.submitButton:hover {
+    background: #0073cc;
+}
+
+.successMessage {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-top: 40px;
+}
+
+.backButton {
+    margin-top: 24px;
+    padding: 10px 20px;
+    background: var(--bg-color-2);
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.backButton:hover {
+    background: var(--primary-color);
+    color: white;
+}
