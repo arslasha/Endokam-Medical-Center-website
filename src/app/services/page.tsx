@@ -11,6 +11,7 @@ import {
     ShieldCheck,
 } from 'lucide-react';
 import Image from 'next/image';
+import {Button} from "antd";
 
 const services = [
     {
@@ -19,7 +20,7 @@ const services = [
         shortDescription: 'Современные методы диагностики ЖКТ и дыхательных путей',
         fullDescription: 'Проводим полный спектр эндоскопических исследований, включая гастроскопию, колоноскопию и бронхоскопию. Используем оборудование экспертного класса с высокой детализацией изображения. Возможность проведения исследований под седацией.',
         icon: <ScanEye size={28} />,
-        image: '/images/endoscopy.jpg'
+        image: '/images/services/endoscopy.jpg'
     },
     {
         id: 'sedation',
@@ -27,7 +28,7 @@ const services = [
         shortDescription: 'Комфортное обезболивание при медицинских процедурах',
         fullDescription: 'Медикаментозный сон (седация) позволяет проводить неприятные процедуры без стресса и дискомфорта. Используем безопасные препараты последнего поколения. Процедура контролируется анестезиологом-реаниматологом с мониторингом жизненных показателей.',
         icon: <ShieldCheck size={28} />,
-        image: '/images/sedation.jpg'
+        image: '/images/services/sedation.jpg'
     },
     {
         id: 'consultations',
@@ -35,7 +36,7 @@ const services = [
         shortDescription: 'Приемы терапевта, педиатра и узких специалистов',
         fullDescription: 'Консультации квалифицированных специалистов с большим опытом работы. Проводим комплексные обследования, разрабатываем индивидуальные планы лечения и профилактики. Возможен выезд врача на дом.',
         icon: <UserCircle size={28} />,
-        image: '/images/consultation.jpg'
+        image: '/images/services/consultation.jpg'
     },
     {
         id: 'biopsy',
@@ -43,7 +44,7 @@ const services = [
         shortDescription: 'Минимально инвазивные методы диагностики и лечения',
         fullDescription: 'Выполняем забор тканей для гистологического исследования с помощью современных методик. Удаление доброкачественных новообразований кожи и слизистых (папиллом, невусов, полипов) радиоволновым и лазерным методами.',
         icon: <Syringe size={28} />,
-        image: '/images/biopsy.jpg'
+        image: '/images/services/biopsy.jpg'
     },
     {
         id: 'histology',
@@ -51,7 +52,7 @@ const services = [
         shortDescription: 'Анализ тканей и клеток для точной диагностики',
         fullDescription: 'Собственная лаборатория позволяет проводить гистологические и цитологические исследования в короткие сроки. Точная диагностика опухолевых и неопухолевых заболеваний. Возможность получения второго мнения от ведущих специалистов.',
         icon: <Microscope size={28} />,
-        image: '/images/histology.jpg'
+        image: '/images/services/histology.jpg'
     },
     {
         id: 'extras',
@@ -59,7 +60,7 @@ const services = [
         shortDescription: 'Медсправки, анализы, перевязки и прочие процедуры',
         fullDescription: 'Широкий спектр медицинских услуг: забор анализов, оформление медицинской документации, перевязки, инъекции, капельницы, физиотерапевтические процедуры. Работаем с пациентами всех возрастов.',
         icon: <Stethoscope size={28} />,
-        image: '/images/extras.jpg'
+        image: '/images/services/extras.jpg'
     },
 ];
 
@@ -108,18 +109,18 @@ export default function ServicesPage() {
                             <p className={styles.fullDescription}>{service.fullDescription}</p>
 
                             <div className={styles.buttons}>
-                                <button
+                                <Button
                                     onClick={() => handleDetailsClick(service.id)}
                                     className={styles.detailsButton}
                                 >
                                     Подробнее
-                                </button>
-                                <button
-                                    onClick={() => handlePreparationClick(service.id)}
+                                </Button>
+                                <Button
                                     className={styles.preparationButton}
+                                    href={"/preparation"}
                                 >
                                     Подготовка
-                                </button>
+                                </Button>
                             </div>
                         </div>
                     </div>

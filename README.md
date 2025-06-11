@@ -98,7 +98,7 @@ src/
 ├── lib/                  # Вспомогательные функции
 │   ├── api/              # API клиенты
 │   ├── constants/        # Константы
-│   │   ├── routes.ts
+│   │   ├── route.ts
 │   │   ├── servicesCategory.ts  # Данные об услугах
 │   │   └── ...
 │   └── utils/           # Утилиты

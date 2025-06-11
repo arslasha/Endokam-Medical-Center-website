@@ -125,11 +125,12 @@
 
 .detailsButton {
     background-color: var(--primary-color);
-    color: white;
+    color: white !important;
 }
 
 .detailsButton:hover {
-    background-color: #168c88;
+    background-color: #168c88 !important;
+    color: white;
 }
 
 .preparationButton {

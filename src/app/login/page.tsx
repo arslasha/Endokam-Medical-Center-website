@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { LoginFormValues } from '@/types/login';
 import styles from './Login.module.css';
+import {signIn} from "next-auth/react";
 
 const loginSchema = z.object({
     login: z.string().min(5).refine(
@@ -45,8 +46,22 @@ export default function LoginPage() {
                 </label>
                 <button type="submit" className={styles.submit}>Войти</button>
                 <div className={styles.altLogin}>
-                    <button type="button" className={styles.oauth}>Войти через Google</button>
-                    <button type="button" className={styles.oauth}>Войти через Yandex</button>
+                    <div className={styles.altLogin}>
+                        <button
+                            type="button"
+                            onClick={() => signIn('google')}
+                            className={styles.oauth}
+                        >
+                            Войти через Google
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => signIn('yandex')}
+                            className={styles.oauth}
+                        >
+                            Войти через Yandex
+                        </button>
+                    </div>
                 </div>
                 <Link href="/login/register" className={styles.link}>Нет аккаунта? Зарегистрируйтесь</Link>
             </form>

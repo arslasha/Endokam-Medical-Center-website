@@ -81,7 +81,7 @@ export default function PatientPage() {
                 <div className={styles.imageColumn}>
                     <div className={styles.imageWrapper}>
                         <Image
-                            src="/images/patient-doctor.jpg"
+                            src="/images/patient/patient-doctor.jpg"
                             alt="Врач с документами"
                             fill
                             className={styles.image}
