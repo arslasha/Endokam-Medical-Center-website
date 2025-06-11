@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import SectionHeader from "@/components/shared/SectionHeader";
 
-const services = [
+const servicesCategory = [
     {
         id: 'endoscopy',
         title: 'Эндоскопические исследования',
@@ -65,11 +65,11 @@ export const Services = () => {
                 description="Наша клиника предоставляет широкий спектр медицинских услуг для пациентов любого возраста.
                     Мы используем современные методы диагностики и лечения, обеспечивая высокий уровень
                     безопасности и комфорта."
-                href="/services"
+                href="/servicesCategory"
             />
 
             <div className={styles.services__grid}>
-                {services.map(({id, title, description, icon}) => (
+                {servicesCategory.map(({id, title, description, icon}) => (
                     <div
                         key={id}
                         className={styles.services__card}

@@ -1,8 +1,3 @@
-:root {
-    --primary-color: #008080;
-    --bg-color: #fff;
-}
-
 .header {
     position: sticky;
     top: 0;

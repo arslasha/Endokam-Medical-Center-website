@@ -58,7 +58,7 @@ export default function Header() {
                         <Link href="/news" className={styles.header__link}>Новости</Link>
                         <Link href="/patient" className={styles.header__link}>Пациентам</Link>
                         <Link href="/services" className={styles.header__link}>Услуги</Link>
-                        <Link href="/reviews" className={styles.header__link}>Отзывы</Link>
+                        {/*<Link href="/reviews" className={styles.header__link}>Отзывы</Link>*/}
                         <Link href="/analyzes" className={styles.header__link}>Анализы</Link>
                     </nav>
 

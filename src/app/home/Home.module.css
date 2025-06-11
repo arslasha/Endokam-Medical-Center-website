@@ -5,7 +5,7 @@
     padding: 0 32px;
     background-size: cover;
     border-radius: 16px;
-    background: var(--bg-color-2) url("/images/backgrounds/hero-bg.svg") center;
+    background: var(--bg-color-2) url("/images/backgrounds/hero-bg.png") center;
 }
 
 .hero__content {
@@ -54,6 +54,7 @@
     color: var(--primary-color);
     background: var(--bg-color);
 }
+
 .sectionTitle {
     font-size: 28px;
     font-weight: 600;

@@ -28,7 +28,7 @@ src/
 │   │   └── components/
 │   │       ├── PatientForm.module.css
 │   │       └── Instructions.tsx
-│   ├── services/
+│   ├── servicesCategory/
 │   │   ├── page.tsx
 │   │   ├── layout.tsx
 │   │   └── [service]/
@@ -60,7 +60,7 @@ src/
 │   └── (marketing)/      # Группа маршрутов для маркетинга
 │       ├── layout.tsx    # Общий макет для маркетинговых страниц
 │       ├── about/
-│       └── services/
+│       └── servicesCategory/
 │
 ├── components/           # Общие компоненты
 │   ├── ui/               # Базовые UI-компоненты
@@ -99,7 +99,7 @@ src/
 │   ├── api/              # API клиенты
 │   ├── constants/        # Константы
 │   │   ├── routes.ts
-│   │   ├── services.ts  # Данные об услугах
+│   │   ├── servicesCategory.ts  # Данные об услугах
 │   │   └── ...
 │   └── utils/           # Утилиты
 │       ├── date.ts
@@ -107,7 +107,7 @@ src/
 │
 ├── types/                # Типы TypeScript
 │   ├── index.d.ts
-│   ├── services.d.ts
+│   ├── servicesCategory.d.ts
 │   └── ...
 │
 └── hooks/                # Кастомные хуки

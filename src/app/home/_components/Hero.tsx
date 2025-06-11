@@ -14,10 +14,10 @@ export const Hero = () => {
                         центр, основанный доктором Хисамутдиновым И. Г. в Набережных Челнах.
                     </p>
                     <div className={styles.hero__buttons}>
-                        <Button type="primary" size="large" href="/about">
+                        <Button type="primary" size="large" href="/appointment">
                             Записаться на прием
                         </Button>
-                        <Button className={styles.hero__button_call} size="large" href="/about">
+                        <Button className={styles.hero__button_call} size="large" href="tel:+79178911663">
                             Связаться с нами
                         </Button>
                     </div>

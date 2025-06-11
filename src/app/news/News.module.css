@@ -101,6 +101,10 @@
     color: #444;
 }
 
+.closeButton:hover {
+    color: #008080;
+}
+
 .modalTitle {
     font-size: 24px;
     font-weight: 700;

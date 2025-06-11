@@ -1,0 +1,244 @@
+/* ==== ОСНОВНЫЕ НАЧАЛО ===== */
+
+.container {
+    padding: 40px 32px;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.section {
+    margin-bottom: 48px;
+}
+
+.sectionTitle {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+.cardList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.submitButton {
+    margin-top: 24px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #008080;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.submitButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* ==== ОСНОВНЫЕ КОНЕЦ ===== */
+
+
+/* ==== КАРТОЧКА ДОКТОРА НАЧАЛО ===== */
+
+.doctorCard {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding: 16px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: border 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.doctorCard:hover {
+    border-color: #008080;
+}
+
+.doctorCardSelected {
+    border-color: var(--primary-color);
+    background-color: #f0fdfa;
+}
+
+.doctorAvatar {
+    width: 64px;
+    height: 64px;
+    background-color: #e0f2f2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.doctorInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.doctorName {
+    font-weight: 700;
+    font-size: 16px;
+    margin: 0;
+}
+
+.doctorRole {
+    color: #555;
+    font-size: 14px;
+    margin: 4px 0;
+}
+
+.doctorDesc {
+    font-size: 13px;
+    color: #777;
+}
+
+/* ==== КАРТОЧКА ДОКТОРА КОНЕЦ ===== */
+
+/* ==== КАРТОЧКА УСЛУГИ НАЧАЛО ===== */
+
+.columns {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+}
+
+.column {
+    flex: 1 1 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.serviceCard {
+    background: white;
+    border-radius: 12px;
+    padding: 16px 20px;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.serviceCard:hover {
+    border-color: var(--primary-color);
+}
+
+.serviceCardSelected {
+    border-color: var(--primary-color);
+    background-color: #f0fdfa;
+}
+
+.serviceCardContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.serviceCardTitle {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.serviceCardDescription {
+    font-size: 14px;
+    color: #555;
+}
+
+.serviceCardPrice {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+
+
+/* ==== КАРТОЧКА УСЛУГИ КОНЕЦ ===== */
+
+
+.dateList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.dateButton {
+    background: #f1f1f1;
+    border: 1px solid #ccc;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.dateButton:hover {
+    background: #e6f9f9;
+    border-color: var(--primary-color);
+}
+
+.timeList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.timeButton {
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.timeButton:hover {
+    background: #e6f9f9;
+    border-color: var(--primary-color);
+}
+
+.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+
+/* ================= */
+
+.timeSection {
+    margin-top: 20px;
+    padding: 15px;
+    background: #ffffff;
+    border: 2px solid #0000;
+    border-radius: 8px;
+}
+
+.timeTitle {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.confirmSection {
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    display: grid;
+}
+
+.confirmSection p {
+    margin-bottom: 15px;
+}
+
+.timeButton {
+    width: 100px;
+    height: 40px;
+}

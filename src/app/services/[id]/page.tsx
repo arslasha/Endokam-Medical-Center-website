@@ -2,7 +2,7 @@
 
 import { notFound } from "next/navigation";
 import styles from "./ServiceDetail.module.css";
-import { services } from "@/lib/data/services";
+import { servicesCategory } from "@/lib/data/servicesCategory";
 import React from "react";
 
 interface ServiceDetailPageProps {
@@ -12,7 +12,7 @@ interface ServiceDetailPageProps {
 }
 
 export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
-    const service = services.find((s) => s.id === params.id);
+    const service = servicesCategory.find((s) => s.id === params.id);
 
     if (!service) return notFound();
 

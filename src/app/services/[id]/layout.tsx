@@ -1,4 +1,4 @@
-// src/app/services/[id]/layout.tsx
+// src/app/servicesCategory/[id]/layout.tsx
 
 import React from "react";
 
