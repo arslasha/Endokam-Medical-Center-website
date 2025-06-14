@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation';
 import {Button} from "antd";
 
 
-interface Props {
+interface PageProps {
     params: {
         id: string;
     };
@@ -16,7 +16,7 @@ interface Props {
     };
 }
 
-export default function DoctorPage({ params }: Props) {
+export default function DoctorPage({ params }: PageProps) {
     const doctor = getDoctorById(params.id);
 
     if (!doctor) return notFound();
