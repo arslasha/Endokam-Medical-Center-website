@@ -4,20 +4,24 @@ import { PageTransition } from '@/components/shared/PageTransition';
 import styles from './DoctorPage.module.css';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import {Button} from "antd";
+import { Button } from "antd";
+import {use} from "react";
 
 
 interface PageProps {
-    params: {
+    params: Promise<{
         id: string;
-    };
+    }>;
     searchParams?: {
         [key: string]: string | string[] | undefined;
     };
 }
 
+
 export default function DoctorPage({ params }: PageProps) {
-    const doctor = getDoctorById(params.id);
+    // Распаковываем Promise с помощью use()
+    const { id } = use(params);
+    const doctor = getDoctorById(id);
 
     if (!doctor) return notFound();
 
