@@ -7,9 +7,14 @@ import { notFound } from 'next/navigation';
 import {Button} from "antd";
 
 
-type Props = {
-    params: { id: string };
-};
+interface Props {
+    params: {
+        id: string;
+    };
+    searchParams?: {
+        [key: string]: string | string[] | undefined;
+    };
+}
 
 export default function DoctorPage({ params }: Props) {
     const doctor = getDoctorById(params.id);
