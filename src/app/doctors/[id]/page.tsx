@@ -5,22 +5,19 @@ import styles from './DoctorPage.module.css';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Button } from "antd";
-import {use} from "react";
 
 
 interface PageProps {
-    params: Promise<{
+    params: {
         id: string;
-    }>;
+    };
     searchParams?: {
         [key: string]: string | string[] | undefined;
     };
 }
 
-
 export default function DoctorPage({ params }: PageProps) {
-    // Распаковываем Promise с помощью use()
-    const { id } = use(params);
+    const { id } = params;
     const doctor = getDoctorById(id);
 
     if (!doctor) return notFound();

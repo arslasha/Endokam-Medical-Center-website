@@ -3,18 +3,17 @@
 import { notFound } from "next/navigation";
 import styles from "./ServiceDetail.module.css";
 import { servicesCategory } from "@/lib/data/servicesCategory";
-import { use } from 'react';
 import { useRouter } from 'next/navigation';
 
 interface ServiceDetailPageProps {
-    params: Promise<{
+    params: {
         id: string;
-    }>;
+    };
 }
 
 export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
     const router = useRouter();
-    const { id } = use(params);
+    const { id } = params;
     const service = servicesCategory.find((s) => s.id === id);
 
     if (!service) return notFound();
