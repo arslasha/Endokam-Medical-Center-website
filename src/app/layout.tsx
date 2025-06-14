@@ -1,5 +1,3 @@
-
-
 import 'antd/dist/reset.css';
 import '../styles/globals.css';
 
@@ -8,7 +6,7 @@ import ruRU from 'antd/locale/ru_RU';
 import Header from '@/components/layout/header/Header';
 import Footer from '@/components/layout/footer/Footer';
 import { ReactNode } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import AnimatedWrapper from '@/components/shared/AnimatedWrapper';
 
 export const metadata = {
     title: 'МедКлиника | Главная',
@@ -19,22 +17,19 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="ru">
         <body>
-        <AnimatePresence mode="wait">
-
-        </AnimatePresence>
         <ConfigProvider
             locale={ruRU}
             theme={{
                 token: {
-                    colorPrimary: '#008080', // основной цвет бренда
+                    colorPrimary: '#008080',
                     fontFamily: "'Inter', sans-serif",
                 },
             }}
         >
             <Header />
-            <AnimatePresence mode="wait">
+            <AnimatedWrapper>
                 <main style={{ minHeight: '80vh', padding: '24px' }}>{children}</main>
-            </AnimatePresence>
+            </AnimatedWrapper>
             <Footer />
         </ConfigProvider>
         </body>

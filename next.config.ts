@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+    transpilePackages: ['framer-motion'],
+    // Другие настройки можно добавить здесь
 };
 
 export default nextConfig;
