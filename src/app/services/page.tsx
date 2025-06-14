@@ -71,10 +71,6 @@ export default function ServicesPage() {
         router.push(`/services/${id}`);
     };
 
-    const handlePreparationClick = (id: string) => {
-        router.push(`/services/${id}/preparation`);
-    };
-
     return (
         <section className={styles.servicesPage}>
 

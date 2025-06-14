@@ -6,6 +6,7 @@ import { useState } from 'react';
 import styles from './Analyzes.module.css';
 
 import { z } from 'zod';
+import Link from "next/link";
 
 const AnalyzesFormSchema = z.object({
     fullName: z.string().min(5, 'Введите полное имя'),
@@ -40,7 +41,7 @@ export default function AnalyzesPage() {
             <div className={styles.successMessage}>
                 <h1>Данные отправлены, ожидайте сообщения на почту или звонка</h1>
                 <p>Спасибо что посетили нас!</p>
-                <a href="/" className={styles.homeButton}>На главную</a>
+                <Link href="/" className={styles.homeButton}>На главную</Link>
             </div>
         );
     }
