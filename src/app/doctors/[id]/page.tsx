@@ -6,16 +6,16 @@ import { notFound } from 'next/navigation';
 import { Button } from 'antd';
 import Link from 'next/link';
 
+
 interface DoctorPageProps {
     params: {
         id: string;
     };
 }
 
-export default function DoctorPage({ params }: DoctorPageProps) {
+export default async function DoctorPage({ params }: DoctorPageProps) {
     const { id } = params;
-    const doctor = getDoctorById(id);
-
+    const doctor = await Promise.resolve(getDoctorById(id));
     if (!doctor) return notFound();
 
     return (
