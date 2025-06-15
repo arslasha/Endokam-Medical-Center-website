@@ -1,4 +1,3 @@
-// src/app/doctors/[id]/page.tsx
 import { getDoctorById } from '@/lib/data/doctors';
 import { PageTransition } from '@/components/shared/PageTransition';
 import styles from './DoctorPage.module.css';
@@ -6,19 +5,9 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Button } from "antd";
 
-
-interface PageProps {
-    params: {
-        id: string;
-    };
-    searchParams?: {
-        [key: string]: string | string[] | undefined;
-    };
-}
-
-export default async function DoctorPage({ params }: PageProps) {
+export default function DoctorPage({ params }: { params: { id: string } }) {
     const { id } = params;
-    const doctor = getDoctorById(id);
+    const doctor = getDoctorById(id); // синхронно
 
     if (!doctor) return notFound();
 
