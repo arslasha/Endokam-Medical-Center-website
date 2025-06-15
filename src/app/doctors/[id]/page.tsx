@@ -5,17 +5,8 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Button } from "antd";
 
+export default function DoctorPage({ params }: { params: { id: string } }) {
 
-interface DoctorPageProps {
-    params: {
-        id: string;
-    };
-    searchParams?: {
-        [key: string]: string | string[] | undefined;
-    };
-}
-
-export default function DoctorPage({ params }: DoctorPageProps) {
     const { id } = params;
     const doctor = getDoctorById(id); // синхронно
 
