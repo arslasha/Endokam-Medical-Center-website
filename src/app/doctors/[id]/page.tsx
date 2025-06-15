@@ -16,7 +16,7 @@ interface PageProps {
     };
 }
 
-export default function DoctorPage({ params }: PageProps) {
+export default async function DoctorPage({ params }: PageProps) {
     const { id } = params;
     const doctor = getDoctorById(id);
 

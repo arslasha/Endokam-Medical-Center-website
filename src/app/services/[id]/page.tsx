@@ -1,4 +1,4 @@
-'use client';
+// src/app/services/[id]/page.tsx
 
 import { notFound } from "next/navigation";
 import styles from "./ServiceDetail.module.css";
