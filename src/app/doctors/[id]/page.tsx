@@ -1,3 +1,5 @@
+'use client'; // Добавляем директиву для клиентского компонента
+
 import { getDoctorById } from '@/lib/data/doctors';
 import { PageTransition } from '@/components/shared/PageTransition';
 import styles from './DoctorPage.module.css';
@@ -5,17 +7,19 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Button } from 'antd';
 import Link from 'next/link';
+import {use} from "react";
 
-
+// Упрощенный интерфейс без наследования от PageProps
 interface DoctorPageProps {
-    params: {
+    params: Promise<{
         id: string;
-    };
+    }>;
 }
 
-export default async function DoctorPage({ params }: DoctorPageProps) {
-    const { id } = params;
-    const doctor = await Promise.resolve(getDoctorById(id));
+export default function DoctorPage({ params }: DoctorPageProps) {
+    const { id } = use(params);
+    const doctor = getDoctorById(id);
+
     if (!doctor) return notFound();
 
     return (
@@ -28,7 +32,7 @@ export default async function DoctorPage({ params }: DoctorPageProps) {
                         width={400}
                         height={500}
                         className={styles.image}
-                        priority // Если изображение выше-the-fold
+                        priority
                     />
                 </div>
                 <div className={styles.content}>
