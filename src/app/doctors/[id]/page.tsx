@@ -3,12 +3,18 @@ import { PageTransition } from '@/components/shared/PageTransition';
 import styles from './DoctorPage.module.css';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { Button } from "antd";
+import { Button } from 'antd';
+import Link from 'next/link';
 
-export default function DoctorPage({ params }: { params: { id: string } }) {
+interface DoctorPageProps {
+    params: {
+        id: string;
+    };
+}
 
+export default function DoctorPage({ params }: DoctorPageProps) {
     const { id } = params;
-    const doctor = getDoctorById(id); // синхронно
+    const doctor = getDoctorById(id);
 
     if (!doctor) return notFound();
 
@@ -22,6 +28,7 @@ export default function DoctorPage({ params }: { params: { id: string } }) {
                         width={400}
                         height={500}
                         className={styles.image}
+                        priority // Если изображение выше-the-fold
                     />
                 </div>
                 <div className={styles.content}>
@@ -39,9 +46,12 @@ export default function DoctorPage({ params }: { params: { id: string } }) {
                         <p><strong>Образование:</strong> {doctor.education}</p>
                         <p><strong>Достижения:</strong> {doctor.achievements}</p>
                     </section>
-                    <Button type="primary" size="large" href="/">
-                        На главную
-                    </Button>
+
+                    <Link href="/" passHref>
+                        <Button type="primary" size="large">
+                            На главную
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </PageTransition>
