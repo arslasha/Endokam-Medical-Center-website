@@ -3,7 +3,7 @@
 import { notFound } from "next/navigation";
 import styles from "./ServiceDetail.module.css";
 import { servicesCategory } from "@/lib/data/servicesCategory";
-import { useRouter } from 'next/navigation';
+import Link from "next/link";
 
 interface ServiceDetailPageProps {
     params: {
@@ -12,7 +12,6 @@ interface ServiceDetailPageProps {
 }
 
 export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
-    const router = useRouter();
     const { id } = params;
     const service = servicesCategory.find((s) => s.id === id);
 
@@ -39,12 +38,9 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
                 </div>
             ))}
 
-            <button
-                onClick={() => router.back()}
-                className={styles.backButton}
-            >
+            <Link href="/services" className={styles.backButton}>
                 ← Назад
-            </button>
+            </Link>
         </div>
     );
 }
