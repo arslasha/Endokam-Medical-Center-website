@@ -5,14 +5,11 @@ import styles from "./ServiceDetail.module.css";
 import { servicesCategory } from "@/lib/data/servicesCategory";
 import Link from "next/link";
 
-interface ServiceDetailPageProps {
-    params: {
-        id: string;
-    };
-}
 
-export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
-    const { id } = params;
+export default async function ServiceDetailPage(props: {
+    params: Promise<{ id: string }>;
+}) {
+    const { id } = await props.params;
     const service = servicesCategory.find((s) => s.id === id);
 
     if (!service) return notFound();

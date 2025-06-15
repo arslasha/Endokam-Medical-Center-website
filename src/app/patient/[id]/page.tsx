@@ -273,8 +273,11 @@ const dynamicArticles: PatientArticle[] = [
     }
 ];
 
-export default function PatientArticlePage({ params }: { params: { id: string } }) {
-    const article = dynamicArticles.find(a => a.id === params.id);
+export default async function PatientArticlePage(props: {
+    params: Promise<{ id: string }>;
+}) {
+    const { id } = await props.params;
+    const article = dynamicArticles.find(a => a.id === id);
 
     if (!article) return notFound();
 
