@@ -12,3 +12,10 @@ body {
     background: #fafafa;
     color: #212121;
 }
+
+@media screen and (max-width: 450px) {
+    main {
+        width: 100%;
+        padding: 16px;
+    }
+}

@@ -173,8 +173,11 @@
 }
 
 @media (max-width: 768px) {
+    .preparation {
+        padding: 20px 10px;
+    }
     .articlePage {
-        margin: 20px;
+        margin: 0;
         padding: 24px;
     }
 

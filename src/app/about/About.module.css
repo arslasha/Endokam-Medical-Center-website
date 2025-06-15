@@ -60,10 +60,15 @@
 
 /* Адаптивность */
 @media screen and (max-width: 768px) {
+    .container {
+        gap: 0;
+    }
+    .layout {
+        padding: 0;
+    }
     .section {
         flex-direction: column;
         align-items: center;
-        text-align: center;
     }
 
     .text {

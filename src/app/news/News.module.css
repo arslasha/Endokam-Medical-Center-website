@@ -14,8 +14,9 @@
 
 .title {
     font-size: 32px;
-    font-weight: 700;
+    font-weight: bold;
     text-align: center;
+    margin-bottom: 32px;
 }
 
 .grid {
@@ -138,6 +139,14 @@
 
 /* === Responsive === */
 @media screen and (max-width: 600px) {
+    .layout {
+        padding: 20px 10px;;
+    }
+
+    .container {
+        gap: 0;
+    }
+
     .modal {
         padding: 20px;
     }

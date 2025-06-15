@@ -33,12 +33,17 @@ export default function Header() {
         };
     }, [isMenuOpen, isMobile]);
 
+    // Функция для закрытия меню
+    const closeMenu = () => {
+        setMenuOpen(false);
+    };
+
     return (
         <header className={styles.header}>
             <div className={styles.header__inner}>
                 {/* Логотип */}
                 <div className={styles.header__left}>
-                    <Link href="/" className={styles.header__logo}>
+                    <Link href="/" className={styles.header__logo} onClick={closeMenu}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
                              fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <circle cx="12" cy="12" r="10" />
@@ -58,7 +63,6 @@ export default function Header() {
                         <Link href="/news" className={styles.header__link}>Новости</Link>
                         <Link href="/patient" className={styles.header__link}>Пациентам</Link>
                         <Link href="/services" className={styles.header__link}>Услуги</Link>
-                        {/*<Link href="/reviews" className={styles.header__link}>Отзывы</Link>*/}
                         <Link href="/analyzes" className={styles.header__link}>Анализы</Link>
                     </nav>
 
@@ -95,16 +99,14 @@ export default function Header() {
             {/* Выпадающее меню / overlay */}
             {isMenuOpen && (
                 <div ref={menuRef}>
-                    { (
-                        <div className={styles.header__dropdownMenu}>
-                            <Link href="/about" className={styles.header__link}>О нас</Link>
-                            <Link href="/news" className={styles.header__link}>Новости</Link>
-                            <Link href="/patient" className={styles.header__link}>Пациентам</Link>
-                            <Link href="/services" className={styles.header__link}>Услуги</Link>
-                            <Link href="/analyzes" className={styles.header__link}>Анализы</Link>
-                            <Link href="/login" className={styles.header__link}>Войти</Link>
-                        </div>
-                    )}
+                    <div className={styles.header__dropdownMenu}>
+                        <Link href="/about" className={styles.header__link} onClick={closeMenu}>О нас</Link>
+                        <Link href="/news" className={styles.header__link} onClick={closeMenu}>Новости</Link>
+                        <Link href="/patient" className={styles.header__link} onClick={closeMenu}>Пациентам</Link>
+                        <Link href="/services" className={styles.header__link} onClick={closeMenu}>Услуги</Link>
+                        <Link href="/analyzes" className={styles.header__link} onClick={closeMenu}>Анализы</Link>
+                        <Link href="/login" className={styles.header__link} onClick={closeMenu}>Войти</Link>
+                    </div>
                 </div>
             )}
         </header>
