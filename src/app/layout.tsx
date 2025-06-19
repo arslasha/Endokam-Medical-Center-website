@@ -9,11 +9,13 @@ import { ReactNode } from 'react';
 import AnimatedWrapper from '@/components/shared/AnimatedWrapper';
 
 export const metadata = {
-    title: 'МедКлиника | Главная',
+    title: 'Эндокам | Главная',
     description: 'Медицинская клиника — забота и здоровье для всей семьи.',
-};
+    robots: 'noindex',
+}
+;
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({children }: { children: ReactNode }) {
     return (
         <html lang="ru">
         <body>

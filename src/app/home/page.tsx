@@ -5,11 +5,12 @@ import { Services } from './_components/Services';
 import Reviews from './_components/Reviews';
 import Location from "@/app/home/_components/Location";
 
+
 export default function HomePage() {
     return (
         <>
             <PageTransition>
-                <Hero />
+            <Hero />
                 <Services />
                 <Doctors />
                 <Reviews />
