@@ -18,10 +18,10 @@ const preparationArticles = [
         image: '/images/preparation/fortrans.jpg',
     },
     {
-        id: 'moviprep',
-        title: 'Подготовка к ФКС — Мовипреп',
-        description: 'Рекомендации по приёму Мовипрепа перед исследованием.',
-        image: '/images/preparation/moviprep.jpg',
+        id: 'eziklen',
+        title: 'Подготовка к ФКС — Эзиклен',
+        description: 'Рекомендации по приёму Эзиклена перед исследованием.',
+        image: '/images/preparation/eziklen.jpg',
     },
 ];
 
@@ -41,8 +41,8 @@ export default function PreparationPage() {
                         <Image
                             src={item.image}
                             alt={item.title}
-                            width={400}
-                            height={220}
+                            width={380}
+                            height={200}
                             className={styles.image}
                         />
                         <div className={styles.body}>
