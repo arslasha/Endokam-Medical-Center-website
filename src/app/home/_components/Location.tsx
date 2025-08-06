@@ -18,8 +18,8 @@ export default function Location() {
                     <p className={styles.address}>
                         Адрес: Набережные Челны, ЗЯБ, 17а комплекс, 24Б (пересечение с Набережночелнинский проспект, 5Б), 1 этаж; 1 подъезд
                     </p>
-                    <p className={styles.contact}>Телефон: +7 (917) 891-16-63 </p>
-                    <p className={styles.contact}>Email: endokam@mail.ru</p>
+                    <p>Телефон: <a className={styles.contact} href="tel:89178911663">8 (917) 891-16-63</a></p>
+                    <p>Email: <a className={styles.contact} href="mailto:endokam@mail.ru">endokam@mail.ru</a></p>
                 </div>
             </div>
         </section>

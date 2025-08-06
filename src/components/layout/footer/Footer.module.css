@@ -36,6 +36,18 @@
     margin-bottom: 8px;
 }
 
+.tel {
+    font-size: 15px;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    text-decoration: #168c88;
+}
+
+.tel:hover {
+    color: var(--primary-color);
+}
+
 .icons {
     display: flex;
     gap: 16px;

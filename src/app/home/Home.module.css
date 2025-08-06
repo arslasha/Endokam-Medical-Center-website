@@ -5,7 +5,8 @@
     padding: 0 32px;
     background-size: cover;
     border-radius: 16px;
-    background: var(--bg-color-2) url("/images/backgrounds/hero-bg.png") center;
+    background: var(--bg-color-2) url("/images/backgrounds/img.png") center/cover no-repeat;
+    object-fit:  cover;
 }
 
 .hero__content {
@@ -36,7 +37,6 @@
     font-weight: 900;
     line-height: 1.3;
     margin-bottom: 16px;
-
 }
 
 .hero__subtitle {
@@ -390,6 +390,11 @@
 .contact {
     font-size: 16px;
     color: #555;
+    text-decoration: #168c88;
+}
+
+.contact:hover {
+    color: var(--primary-color);
 }
 
 /* ==== LOCATION КОНЕЦ ==== */

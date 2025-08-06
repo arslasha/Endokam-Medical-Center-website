@@ -16,7 +16,7 @@ export default function Footer() {
                         1 этаж; 1 подъезд.
                     </p>
                     <div className={styles.icons}>
-                        <a href="mailto:info@endocam.ru" aria-label="Mail">
+                        <a href="mailto:endokam@mail.ru" aria-label="Mail">
                             <FaEnvelope />
                         </a>
                         <a href="https://wa.me/79178911663" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
@@ -34,9 +34,9 @@ export default function Footer() {
                 {/* Column 2 */}
                 <div className={styles.column}>
                     <h2 className={styles.title}>Наши контакты</h2>
-                    <p className={styles.text}>Тел.: 8 (917) 891-16-63</p>
-                    <p className={styles.text}>Тел.: 8 (8552) 33-30-10</p>
-                    <p className={styles.text}>Тел.: 8 (937) 582-83-20</p>
+                    <p>Тел.: <a className={styles.tel} href="tel:89178911663">8 (917) 891-16-63</a></p>
+                    <p>Тел.: <a className={styles.tel} href="tel:89375828320">8 (937) 582-83-20</a></p>
+                    <p>Почта: <a className={styles.tel} href="mailto:endokam@mail.ru">endokam@mail.ru</a></p>
                 </div>
 
                 {/* Column 3 */}
