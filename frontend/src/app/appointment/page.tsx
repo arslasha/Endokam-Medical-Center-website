@@ -1,105 +1,114 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import api from "@/lib/api/axios";
 import DoctorCard from "./_components/DoctorCard";
 import ServiceCard from "./_components/ServiceCard";
-import styles from "./Appointment.module.css";
 import CalendarCard from "@/app/appointment/_components/CalendarCard";
-import { Button, Space } from "antd";
+import styles from "./Appointment.module.css";
+import { Button, Space, message, Input } from "antd";
 
-const specialists = [
-    {
-        id: 1,
-        name: "Супрунова Е.А.",
-        role: "Гастроэнтеролог",
-        description: "Проводит обследование ЖКТ и консультации",
-    },
-    {
-        id: 2,
-        name: "Хисамутдинов И.Г.",
-        role: "Эндоскопист",
-        description: "Специалист по эндоскопическим процедурам",
-    },
-    {
-        id: 3,
-        name: "Алексеева И.О.",
-        role: "Онколог",
-        description: "Диагностика и лечение новообразований",
-    },
-];
+// Типы данных (лучше вынести в types.d.ts позже)
+interface Doctor {
+    id: number;
+    name: string;
+    role: string;
+    description: string;
+}
 
-const services = [
-    {
-        id: 101,
-        name: "Гастроскопия",
-        price: "4000 ₽",
-        description: "Осмотр верхних отделов ЖКТ",
-    },
-    {
-        id: 102,
-        name: "Колоноскопия",
-        price: "6500 ₽",
-        description: "Полный осмотр толстой кишки",
-    },
-    {
-        id: 103,
-        name: "Консультация онколога",
-        price: "3000 ₽",
-        description: "Первичный прием и диагностика",
-    },
-];
+interface Service {
+    id: number;
+    name: string;
+    price: string;
+    description: string;
+}
 
-const availableDates = [
-    "2025-06-10", "2025-06-11", "2025-06-12",
-    "2025-06-13", "2025-06-14", "2025-06-15",
-    "2025-06-16",
-];
-
-const timeSlots = ["09:00", "10:30", "12:00", "14:00", "15:30", "17:00"];
+interface TimeSlot {
+    id: number;
+    time: string;
+}
 
 export default function AppointmentPage() {
+    const [doctors, setDoctors] = useState<Doctor[]>([]);
+    const [services, setServices] = useState<Service[]>([]);
+    const [availableSlots, setAvailableSlots] = useState<TimeSlot[]>([]);
+    
     const [selectedDoctorId, setSelectedDoctorId] = useState<number | null>(null);
     const [selectedServiceId, setSelectedServiceId] = useState<number | null>(null);
     const [selectedDate, setSelectedDate] = useState<string | null>(null);
-    const [selectedTime, setSelectedTime] = useState<string | null>(null);
+    const [selectedSlotId, setSelectedSlotId] = useState<number | null>(null);
 
-    const canSubmit = selectedDoctorId && selectedServiceId && selectedDate && selectedTime;
+    // Поля для гостя
+    const [guestInfo, setGuestInfo] = useState({
+        firstName: '',
+        lastName: '',
+        phone: ''
+    });
 
-    const handleDateSelect = (date: string) => {
-        setSelectedDate(date);
-        setSelectedTime(null); // Сбрасываем время при выборе новой даты
+    // 1. Загрузка врачей и услуг при монтировании
+    useEffect(() => {
+        api.get('/appointments/doctors/').then(res => setDoctors(res.data));
+        // Предположим, вы создали эндпоинт для услуг аналогично врачам
+        api.get('/appointments/services/').then(res => setServices(res.data));
+    }, []);
+
+    // 2. Загрузка слотов при выборе даты и врача
+    useEffect(() => {
+        if (selectedDoctorId && selectedDate) {
+            api.get(`/appointments/available_slots/?doctor_id=${selectedDoctorId}&date=${selectedDate}`)
+               .then(res => setAvailableSlots(res.data));
+        }
+    }, [selectedDoctorId, selectedDate]);
+
+    const handleBooking = async () => {
+        // Валидация перед отправкой
+        if (!selectedDoctorId || !selectedSlotId || !guestInfo.lastName || !guestInfo.phone) {
+            message.error("Пожалуйста, выберите врача, время и заполните свои контакты");
+            return;
+        }
+    
+        try {
+            const payload = {
+                doctor: selectedDoctorId,
+                slot: selectedSlotId,
+                guest_first_name: guestInfo.firstName,
+                guest_last_name: guestInfo.lastName,
+                guest_phone: guestInfo.phone,
+                // service: selectedServiceId // Если хотите сохранять и услугу, добавьте поле в модель Appointment на бэке
+            };
+            
+            const response = await api.post('/appointments/book/', payload);
+            
+            if (response.status === 201) {
+                message.success("Вы успешно записаны!");
+                // Сбрасываем выбор, чтобы избежать дублей
+                setSelectedSlotId(null);
+                setAvailableSlots(prev => prev.filter(s => s.id !== selectedSlotId));
+            }
+        } catch (error: any) {
+            console.error(error);
+            message.error(error.response?.data?.message || "Ошибка при записи");
+        }
     };
 
     return (
         <div className={styles.container}>
             <div className={styles.columns}>
-                {/* Левая колонка */}
                 <div className={styles.column}>
-                    {/* Выбор специалиста */}
                     <section className={styles.section}>
                         <h2 className={styles.sectionTitle}>Выбор специалиста</h2>
                         <div className={styles.cardList}>
-                            {specialists.map((doctor) => (
+                            {doctors.map((doctor) => (
                                 <DoctorCard
                                     key={doctor.id}
-                                    name={doctor.name}
-                                    role={doctor.role}
-                                    description={doctor.description}
+                                    {...doctor}
                                     selected={selectedDoctorId === doctor.id}
                                     onSelect={() => setSelectedDoctorId(doctor.id)}
                                 />
                             ))}
                         </div>
-                        <button
-                            className={styles.submitButton}
-                            disabled={selectedDoctorId === null}
-                            onClick={() => alert("Специалист выбран")}
-                        >
-                            Выбрать
-                        </button>
                     </section>
 
-                    {/* Выбор услуги */}
                     <section className={styles.section}>
                         <h2 className={styles.sectionTitle}>Выбор услуги</h2>
                         <div className={styles.cardList}>
@@ -114,37 +123,34 @@ export default function AppointmentPage() {
                                 />
                             ))}
                         </div>
-                        <button
-                            className={styles.submitButton}
-                            disabled={selectedServiceId === null}
-                            onClick={() => alert("Услуга выбрана")}
-                        >
-                            Выбрать
-                        </button>
+                    </section>
+
+                    <section className={styles.section}>
+                        <h2 className={styles.sectionTitle}>Данные пациента</h2>
+                        <Space direction="vertical" style={{ width: '100%' }}>
+                            <Input placeholder="Фамилия" onChange={e => setGuestInfo({...guestInfo, lastName: e.target.value})} />
+                            <Input placeholder="Имя" onChange={e => setGuestInfo({...guestInfo, firstName: e.target.value})} />
+                            <Input placeholder="Телефон" onChange={e => setGuestInfo({...guestInfo, phone: e.target.value})} />
+                        </Space>
                     </section>
                 </div>
 
-                {/* Правая колонка — выбор даты и времени */}
                 <div className={styles.column}>
                     <section className={styles.section}>
                         <h2 className={styles.sectionTitle}>Выбор даты и времени</h2>
-                        <CalendarCard
-                            onDateSelect={handleDateSelect}
-                            disabledDates={availableDates}
-                        />
+                        <CalendarCard onDateSelect={setSelectedDate} />
 
                         {selectedDate && (
                             <div className={styles.timeSection}>
                                 <h3 className={styles.timeTitle}>Доступное время:</h3>
                                 <Space wrap>
-                                    {timeSlots.map((time) => (
+                                    {availableSlots.map((slot) => (
                                         <Button
-                                            key={time}
-                                            type={selectedTime === time ? "primary" : "default"}
-                                            onClick={() => setSelectedTime(time)}
-                                            className={styles.timeButton}
+                                            key={slot.id}
+                                            type={selectedSlotId === slot.id ? "primary" : "default"}
+                                            onClick={() => setSelectedSlotId(slot.id)}
                                         >
-                                            {time}
+                                            {slot.time}
                                         </Button>
                                     ))}
                                 </Space>
@@ -153,19 +159,12 @@ export default function AppointmentPage() {
                     </section>
                 </div>
             </div>
-            {selectedTime && (
+
+            {selectedSlotId && (
                 <div className={styles.confirmSection}>
-                    {canSubmit && (
-                        <Button
-                            type="primary"
-                            size="large"
-                            onClick={() => {
-                                alert("Вы записаны, для подтверждения записи с вами свяжутся за день до приема! Спасибо что доверяете нам!");
-                            }}
-                        >
-                            Записаться
-                        </Button>
-                    )}
+                    <Button type="primary" size="large" onClick={handleBooking}>
+                        Записаться на прием
+                    </Button>
                 </div>
             )}
         </div>
