@@ -1,0 +1,60 @@
+/* app/doctors/[id]/DoctorPage.module.css */
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 48px;
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 0 32px;
+    align-items: flex-start;
+}
+
+.imageWrapper {
+    flex-shrink: 0;
+}
+
+.image {
+    border-radius: 12px;
+    width: auto;       /* Ширина по исходному размеру */
+    height: auto;      /* Высота по исходному размеру */
+    max-width: 100%;   /* Ограничение по ширине контейнера */
+    object-fit: contain; /* Сохраняет пропорции, не обрезая */
+}
+
+.content {
+    flex: 1;
+}
+
+.name {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.role {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.section {
+    margin-bottom: 32px;
+}
+
+.sectionTitle {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        margin: 0;
+        padding: 20px 10px;
+    }
+    .image {
+
+    }
+}
