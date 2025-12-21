@@ -1,0 +1,36 @@
+# ===== Node / Next.js =====
+node_modules/
+.next/
+out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ===== Environment =====
+.env
+.env.local
+.env.development
+.env.production
+
+# ===== Python / Django =====
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.sqlite3
+db.sqlite3
+
+# ===== Django static/media =====
+staticfiles/
+media/
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+
+# ===== IDE =====
+.vscode/
+.idea/
+
+# ===== Logs =====
+*.log
