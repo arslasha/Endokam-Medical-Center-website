@@ -1,1 +1,0 @@
-export const ANALYZES_SUBMISSION_ENDPOINT = '/api/analyzes';
