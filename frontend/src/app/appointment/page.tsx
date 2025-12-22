@@ -56,6 +56,29 @@ export default function AppointmentPage() {
     }, []);
 
     useEffect(() => {
+        const fetchUserProfile = async () => {
+            const token = localStorage.getItem('accessToken');
+            if (token) {
+                try {
+                    const res = await api.get('/auth/me/');
+                    const user = res.data;
+                    // Автоматически заполняем стейт guestInfo данными из профиля
+                    setGuestInfo({
+                        firstName: user.first_name || '',
+                        lastName: user.last_name || '',
+                        patronymic: '', // Отчество можно добавить в профиль позже
+                        phone: user.phone || '',
+                        email: user.email || ''
+                    });
+                } catch (err) {
+                    console.log("Пользователь не авторизован или токен невалиден");
+                }
+            }
+        };
+        fetchUserProfile();
+    }, []);
+
+    useEffect(() => {
         if (selectedDoctorId) {
             api.get(`/appointments/working_days/?doctor_id=${selectedDoctorId}`)
                .then(res => {
