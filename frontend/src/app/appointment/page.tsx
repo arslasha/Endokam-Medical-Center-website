@@ -121,8 +121,19 @@ export default function AppointmentPage() {
             
             await api.post('/appointments/book/', payload);
             message.success("Запись успешно создана!");
+
+            // ОБНОВЛЯЕМ СПИСОК СЛОТОВ, чтобы записанное время исчезло
+            if (selectedDoctorId && selectedServiceId && selectedDate) {
+                const res = await api.get(`/appointments/available_slots/`, {
+                    params: {
+                        doctor_id: selectedDoctorId,
+                        service_id: selectedServiceId,
+                        date: selectedDate
+                    }
+                });
+                setAvailableSlots(res.data);
+            }
             
-            // Сброс выбора времени после успеха
             setSelectedSlot(null);
         } catch (error: any) {
             const errorMsg = error.response?.data?.guest_email 
@@ -254,8 +265,6 @@ export default function AppointmentPage() {
                                     height: '50px',
                                     fontSize: '16px',
                                     fontWeight: 'bold',
-                                    // Если кнопка заблокирована, Ant Design сам сделает её серой,
-                                    // но мы форсируем цвет для активного состояния
                                     backgroundColor: isFormValid ? '#008080' : undefined,
                                     borderColor: isFormValid ? '#008080' : undefined,
                                 }}
