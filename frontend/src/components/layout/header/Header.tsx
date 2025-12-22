@@ -3,40 +3,55 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css";
-import { FiMenu, FiSearch, FiUser } from "react-icons/fi";
+import { FiMenu, FiSearch, FiUser, FiLogOut, FiLogIn } from "react-icons/fi"; // Добавили FiLogOut
 import { IoClose } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
     const [isMenuOpen, setMenuOpen] = useState(false);
     const [isSearchOpen, setSearchOpen] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
+    const router = useRouter();
 
     const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+
+    // Проверка авторизации при загрузке и изменении токена
+    useEffect(() => {
+        const checkAuth = () => {
+            const token = localStorage.getItem("accessToken");
+            setIsLoggedIn(!!token);
+        };
+
+        checkAuth();
+        // Слушаем событие изменения хранилища (чтобы шапка обновлялась при входе/выходе в других вкладках)
+        window.addEventListener('storage', checkAuth);
+        return () => window.removeEventListener('storage', checkAuth);
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        setIsLoggedIn(false);
+        setMenuOpen(false);
+        router.push("/login");
+        router.refresh();
+    };
 
     // Закрытие по клику вне
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
-            if (
-                menuRef.current &&
-                !menuRef.current.contains(event.target as Node)
-            ) {
+            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
                 setMenuOpen(false);
             }
         }
-
         if (!isMobile && isMenuOpen) {
             document.addEventListener("mousedown", handleClickOutside);
         }
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
+        return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [isMenuOpen, isMobile]);
 
-    // Функция для закрытия меню
-    const closeMenu = () => {
-        setMenuOpen(false);
-    };
+    const closeMenu = () => setMenuOpen(false);
 
     return (
         <header className={styles.header}>
@@ -44,17 +59,7 @@ export default function Header() {
                 {/* Логотип */}
                 <div className={styles.header__left}>
                     <Link href="/" className={styles.header__logo} onClick={closeMenu}>
-                        {/* <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
-                             fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M14.31 8l5.74 9.94" />
-                            <path d="M9.69 8h11.48" />
-                            <path d="M7.38 12l5.74-9.94" />
-                            <path d="M9.69 16L3.95 6.06" />
-                            <path d="M14.31 16H2.83" />
-                            <path d="M16.62 12l-5.74 9.94" />
-                        </svg> */}
-                        <img src="/images/logos/logo.svg" alt="Логотип"></img>
+                        <img src="/images/logos/logo.svg" alt="Логотип" />
                     </Link>
                 </div>
 
@@ -82,9 +87,25 @@ export default function Header() {
                             </button>
                         )}
 
-                        <Link href="/login" className={styles.header__icon}>
-                            <FiUser />
-                        </Link>
+                        {/* ЛОГИКА КНОПОК АККАУНТА */}
+                        {!isLoggedIn ? (
+                            <Link href="/login" className={styles.header__icon} title="Войти">
+                                <FiLogIn />
+                            </Link>
+                        ) : (
+                            <>
+                                <Link href="/profile" className={styles.header__icon} title="Профиль">
+                                    <FiUser />
+                                </Link>
+                                <button 
+                                    className={styles.header__icon} 
+                                    onClick={handleLogout} 
+                                    title="Выйти"
+                                >
+                                    <FiLogOut />
+                                </button>
+                            </>
+                        )}
 
                         <button
                             className={styles.header__icon}
@@ -97,7 +118,7 @@ export default function Header() {
                 </div>
             </div>
 
-            {/* Выпадающее меню / overlay */}
+            {/* Выпадающее меню */}
             {isMenuOpen && (
                 <div ref={menuRef}>
                     <div className={styles.header__dropdownMenu}>
@@ -106,7 +127,23 @@ export default function Header() {
                         <Link href="/patient" className={styles.header__link} onClick={closeMenu}>Пациентам</Link>
                         <Link href="/services" className={styles.header__link} onClick={closeMenu}>Услуги</Link>
                         <Link href="/analyzes" className={styles.header__link} onClick={closeMenu}>Анализы</Link>
-                        <Link href="/login" className={styles.header__link} onClick={closeMenu}>Войти</Link>
+                        
+                        <div className={styles.header__dropdownDivider} />
+                        
+                        {!isLoggedIn ? (
+                            <Link href="/login" className={styles.header__link} onClick={closeMenu}>Войти</Link>
+                        ) : (
+                            <>
+                                <Link href="/profile" className={styles.header__link} onClick={closeMenu}>Личный кабинет</Link>
+                                <button 
+                                    className={styles.header__link} 
+                                    style={{ textAlign: 'left', background: 'none', border: 'none', cursor: 'pointer', color: '#ff4d4f' }} 
+                                    onClick={handleLogout}
+                                >
+                                    Выйти
+                                </button>
+                            </>
+                        )}
                     </div>
                 </div>
             )}
