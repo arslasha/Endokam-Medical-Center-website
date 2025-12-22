@@ -5,9 +5,53 @@ from datetime import datetime, timedelta
 from django.utils.timezone import make_aware, get_current_timezone
 from .models import DoctorProfile, Appointment, Service, WorkingHours
 from .serializers import DoctorSerializer, ServiceSerializer, AppointmentCreateSerializer
+from rest_framework.permissions import IsAuthenticated
+from django.db.models import Q
+import re
+from django.utils.timezone import now
 
 class AppointmentViewSet(viewsets.ViewSet):
+
+    @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
+    def my_appointments(self, request):
+        user = request.user
+        
+        if user.role == 'DOCTOR':
+            # Врач видит записи, где он назначен доктором
+            appointments = Appointment.objects.filter(doctor__user=user).order_by('start_time')
+        else:
+            # Пациент: очищаем телефон пользователя от лишних знаков для поиска
+            user_phone = re.sub(r'\D', '', user.phone) # Оставляет только цифры
+            
+            # Ищем записи, где email совпадает ИЛИ телефон совпадает (тоже очищенный)
+            # Примечание: в БД телефоны могут храниться по-разному, поэтому 
+            # лучше искать по частичному совпадению или нормализовать при сохранении.
+            appointments = Appointment.objects.filter(
+                Q(guest_email__iexact=user.email) | 
+                Q(guest_phone__contains=user_phone[-10:]) # Берем последние 10 цифр для надежности
+            ).order_by('start_time')
+
+        data = []
+        for app in appointments:
+            # Проверяем, как достать имя. 
+            # Если в модели DoctorProfile есть поле 'name' - оставляем app.doctor.name
+            # Если имя лежит в связанном User:
+            doctor_name = getattr(app.doctor, 'name', None) 
+            if not doctor_name:
+                doctor_name = app.doctor.user.get_full_name() or app.doctor.user.username
+
+            data.append({
+                "id": app.id,
+                "doctor_name": doctor_name, # Используем проверенную переменную
+                "service_name": app.service.name,
+                "start": app.start_time.isoformat(),
+                "end": app.end_time.isoformat(),
+                "patient_name": f"{app.guest_last_name} {app.guest_first_name}",
+                "status": "предстоящая" if app.start_time > now() else "прошедшая"
+            })
+        return Response(data)
     
+
     @action(detail=False, methods=['get'])
     def doctors(self, request):
         doctors = DoctorProfile.objects.all()
