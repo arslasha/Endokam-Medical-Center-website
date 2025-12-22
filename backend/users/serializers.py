@@ -2,10 +2,9 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
-
+    
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
-    # Явно указываем поля как обязательные
     first_name = serializers.CharField(required=True)
     last_name = serializers.CharField(required=True)
     phone = serializers.CharField(required=True)
@@ -21,7 +20,8 @@ class RegisterSerializer(serializers.ModelSerializer):
             email=validated_data.get('email', ''),
             phone=validated_data['phone'],
             first_name=validated_data['first_name'],
-            last_name=validated_data['last_name']
+            last_name=validated_data['last_name'],
+            role='PATIENT'  # Форсируем роль пациента
         )
         return user
 
@@ -29,4 +29,4 @@ class RegisterSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'phone')
+        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'phone', 'role')
