@@ -44,7 +44,7 @@ export default function Header() {
                 {/* Логотип */}
                 <div className={styles.header__left}>
                     <Link href="/" className={styles.header__logo} onClick={closeMenu}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
+                        {/* <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
                              fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <circle cx="12" cy="12" r="10" />
                             <path d="M14.31 8l5.74 9.94" />
@@ -53,7 +53,8 @@ export default function Header() {
                             <path d="M9.69 16L3.95 6.06" />
                             <path d="M14.31 16H2.83" />
                             <path d="M16.62 12l-5.74 9.94" />
-                        </svg>
+                        </svg> */}
+                        <img src="/images/logos/logo.svg" alt="Логотип"></img>
                     </Link>
                 </div>
 

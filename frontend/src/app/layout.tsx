@@ -12,6 +12,9 @@ export const metadata = {
     title: 'Эндокам | Главная',
     description: 'Медицинская клиника — забота и здоровье для всей семьи.',
     robots: 'noindex',
+    icons: {
+        icon: 'images/icon.png', // Путь к файлу в папке public
+    },
 }
 ;
 
